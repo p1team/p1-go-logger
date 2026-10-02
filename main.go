@@ -1,3 +1,4 @@
+// Package logging provides slog loggers with a request ID.
 package logging
 
 import (
@@ -7,6 +8,7 @@ import (
 	"path/filepath"
 )
 
+// New returns a logger with the request ID attached.
 func New(handler slog.Handler, requestID string) *slog.Logger {
 	logger := slog.New(handler)
 
@@ -19,6 +21,7 @@ func New(handler slog.Handler, requestID string) *slog.Logger {
 	return logger
 }
 
+// StdoutHandler returns a JSON handler for standard output.
 func StdoutHandler(level slog.Level) slog.Handler {
 	return slog.NewJSONHandler(
 		os.Stdout,
@@ -28,6 +31,7 @@ func StdoutHandler(level slog.Level) slog.Handler {
 	)
 }
 
+// FileHandler returns a JSON handler for the file at path.
 func FileHandler(
 	path string,
 	level slog.Level,
